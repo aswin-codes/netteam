@@ -220,7 +220,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 child: Text(
-                  "netTeam",
+                  "Net Team",
                   style: GoogleFonts.roboto(
                       fontSize: 25.sp,
                       color: const Color(0xFFFFFFFF),
