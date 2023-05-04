@@ -11,10 +11,11 @@ class VideoCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-    if (args.isLiked) {
-      return EntrepreneurCall();
-    } else {
-      return NormalCall();
-    }
+    // if (args.isLiked) {
+    //   return EntrepreneurCall();
+    // } else {
+    //   return NormalCall();
+    // }
+    return NormalCall();
   }
 }

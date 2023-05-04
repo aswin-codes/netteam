@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^4.0.4
   email_validator: ^2.1.17
   flutter_pin_code_fields: ^2.1.0
+  flutter_svg: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,9 @@ flutter:
     - assets/images/connected.png
     - assets/images/entrepreneur.png
     - assets/images/1.0.png
+    - assets/images/extends.svg
+    - assets/images/endCall.svg
+    - assets/images/chatRequest.svg
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
