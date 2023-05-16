@@ -4,6 +4,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class InterestData {
+  String name;
+  String imagePath;
+  bool isSelected;
+  InterestData(
+      {required this.name, required this.imagePath, required this.isSelected});
+}
+
 class Interests extends StatefulWidget {
   const Interests({super.key});
 
@@ -14,12 +22,200 @@ class Interests extends StatefulWidget {
 class _InterestsState extends State<Interests>
     with SingleTickerProviderStateMixin {
   final TextEditingController _controller = TextEditingController();
-  List<String> _interests = [];
+
+  final List<InterestData> _professional = <InterestData>[
+    InterestData(
+        name: "Accountancy",
+        imagePath: './assets/images/accountancy.png',
+        isSelected: false),
+    InterestData(
+        name: "Consulting",
+        imagePath: './assets/images/consulting.png',
+        isSelected: false),
+    InterestData(
+        name: "Music",
+        imagePath: "./assets/images/music.png",
+        isSelected: false),
+    InterestData(
+        name: "Farming",
+        imagePath: "./assets/images/farming.png",
+        isSelected: false),
+    InterestData(
+        name: "Fintech",
+        imagePath: "./assets/images/fintech.png",
+        isSelected: false),
+    InterestData(
+        name: "Edtech",
+        imagePath: "./assets/images/edtech.png",
+        isSelected: false),
+    InterestData(
+        name: "IT Security",
+        imagePath: "./assets/images/itsecurity.png",
+        isSelected: false),
+    InterestData(
+        name: "Management",
+        imagePath: "./assets/images/management.png",
+        isSelected: false),
+    InterestData(
+        name: "Sales and Marketing",
+        imagePath: "./assets/images/sam.png",
+        isSelected: false),
+    InterestData(
+        name: "Advertisement",
+        imagePath: "./assets/images/advertisement.png",
+        isSelected: false),
+  ];
+
+  final List<InterestData> _student = <InterestData>[
+    InterestData(
+        name: "Science",
+        imagePath: './assets/images/science.png',
+        isSelected: false),
+    InterestData(
+        name: "Arts", imagePath: './assets/images/arts.png', isSelected: false),
+    InterestData(
+        name: "Computer",
+        imagePath: "./assets/images/computer.png",
+        isSelected: false),
+    InterestData(
+        name: "Law", imagePath: "./assets/images/law.png", isSelected: false),
+    InterestData(
+        name: "Medical",
+        imagePath: "./assets/images/medical.png",
+        isSelected: false),
+    InterestData(
+        name: "Finance",
+        imagePath: "./assets/images/finance.png",
+        isSelected: false),
+    InterestData(
+        name: "Business",
+        imagePath: "./assets/images/business.png",
+        isSelected: false),
+    InterestData(
+        name: "Military",
+        imagePath: "./assets/images/military.png",
+        isSelected: false),
+    InterestData(
+        name: "Hotel Management",
+        imagePath: "./assets/images/HM.png",
+        isSelected: false),
+    InterestData(
+        name: "Astranomy",
+        imagePath: "./assets/images/astranomy.png",
+        isSelected: false),
+  ];
+
+  final List<InterestData> _general = <InterestData>[
+    InterestData(
+        name: "Singing",
+        imagePath: './assets/images/singing.png',
+        isSelected: false),
+    InterestData(
+        name: "Dancing",
+        imagePath: './assets/images/dancing.png',
+        isSelected: false),
+    InterestData(
+        name: "Reading",
+        imagePath: "./assets/images/reading.png",
+        isSelected: false),
+    InterestData(
+        name: "Cricket",
+        imagePath: "./assets/images/cricket.png",
+        isSelected: false),
+    InterestData(
+        name: "Badminton",
+        imagePath: "./assets/images/badminton.png",
+        isSelected: false),
+    InterestData(
+        name: "Gym", imagePath: "./assets/images/gym.png", isSelected: false),
+    InterestData(
+        name: "Bowling",
+        imagePath: "./assets/images/bowling.png",
+        isSelected: false),
+    InterestData(
+        name: "Concerts",
+        imagePath: "./assets/images/concerts.png",
+        isSelected: false),
+    InterestData(
+        name: "Festivals",
+        imagePath: "./assets/images/festivals.png",
+        isSelected: false),
+    InterestData(
+        name: "Crafts",
+        imagePath: "./assets/images/crafts.png",
+        isSelected: false),
+  ];
+
+  TextEditingController _interestController = TextEditingController();
+
+  void _addInterest(List a,String interest) {
+    setState(() {
+      a.add(InterestData(name: interest, imagePath: '', isSelected: true));
+    });
+    _interestController.clear();
+  }
+
+   void _showAddInterestDialog(List a) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Add Interest'),
+          backgroundColor: const Color(0xFF0E0B1F),
+          content: TextFormField(
+            controller: _interestController,
+            decoration: InputDecoration(
+              labelText: 'Interest',
+              labelStyle: TextStyle(color: Colors.grey)
+            ),
+            
+            onFieldSubmitted: (value) {
+              _addInterest(a,value);
+              Navigator.of(context).pop();
+            },
+          ),
+          actions: [
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Color(0xFF1EA7D7))
+              ),
+              onPressed: () {
+                _addInterest(a,_interestController.text);
+                Navigator.of(context).pop();
+              },
+              child: Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  int get professionalSelected {
+    return _professional.where((e) => e.isSelected).length;
+  }
+
+  int get studentSelected {
+    return _student.where((element) => element.isSelected).length;
+  }
+
+  int get generalSelected {
+    return _general.where((e) => e.isSelected).length;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: const Color(0xFF0E0B1F),
+        title: Text(
+          "Interests",
+          style: GoogleFonts.roboto(
+              fontWeight: FontWeight.w500,
+              fontSize: 20.sp,
+              color: Colors.white),
+        ),
         elevation: 0.0,
       ),
       backgroundColor: const Color(0xFF0E0B1F),
@@ -27,120 +223,347 @@ class _InterestsState extends State<Interests>
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: EdgeInsets.symmetric(horizontal: 25.w),
           child: SingleChildScrollView(
+            
             scrollDirection: Axis.vertical,
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
-                  height: 60.h,
-                ),
-                SizedBox(
-                  width: 250.w,
-                  child: Text(
-                    "Add your interests",
-                    style: GoogleFonts.roboto(
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                SizedBox(
-                  width: 227.w,
-                  child: Text(
-                    "To help you connect with right people kindly enter all the interests",
-                    style: GoogleFonts.roboto(
-                        color: const Color(0xFF8D92A3),
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.normal),
-                  ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                Wrap(
-                  spacing: 8,
-                  children: [
-                    for (var interest in _interests)
-                      Chip(
-                        label: Text(interest),
-                        deleteIcon: Icon(Icons.clear),
-                        onDeleted: () {
-                          setState(() {
-                            _interests.remove(interest);
-                          });
-                        },
-                      ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _controller,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your interests',
-                          hintStyle: const TextStyle(
-                            fontSize: 15,
-                            color: Color(0xFF9F9F9F),
-                          ),
-                          enabledBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF9F9F9F))),
-                        ),
-                        onSubmitted: (value) {
-                          setState(() {
-                            _interests.add(value);
-                            _controller.clear();
-                          });
-                        },
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _interests.add(_controller.text);
-                          _controller.clear();
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 60.h,
-                ),
+                SizedBox(height: 30.h,),
                 Container(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    height: 46.h,
-                    width: 295.w,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/");
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xFFCBFB5E))),
-                      child: Text(
-                        "CONTINUE",
-                        style: GoogleFonts.roboto(
-                            color: const Color(0xFF20242F),
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold),
-                      ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Professional",
+                          style: GoogleFonts.roboto(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Wrap(
+                            spacing: 6,
+                            runSpacing: 10,
+                            children: _professional
+                                    .map((e) => GestureDetector(
+                                          onTap: () => {
+                                            setState(() {
+                                              e.isSelected = !e.isSelected;
+                                            })
+                                          },
+                                          child: Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  5.w, 4.h, 5.w, 4.h),
+                                              decoration: BoxDecoration(
+                                                  color: e.isSelected
+                                                      ? const Color(0xFFEF3737)
+                                                      : const Color(0xFFFFFFFF),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.h)),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  (e.imagePath != "") ? Image.asset(
+                                                    e.imagePath,
+                                                    height: 12.h,
+                                                    width: 12.h,
+                                                  ) : SizedBox(height: 1.h,),
+                                                  SizedBox(
+                                                    width: 4.w,
+                                                  ),
+                                                  Text(
+                                                    e.name,
+                                                    style: GoogleFonts.roboto(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 12.sp,
+                                                        color: e.isSelected
+                                                            ? Colors.white
+                                                            : const Color(
+                                                                0xFF001AFF)),
+                                                  )
+                                                ],
+                                              )),
+                                        ))
+                                    .toList() +
+                                [
+                                  GestureDetector(
+                                    onTap: () => {
+                                      //Add new Interests
+                                      _showAddInterestDialog(_professional)
+                                    },
+                                    child: Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            5.w, 4.h, 5.w, 4.h),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFFFFFFFF),
+                                            borderRadius:
+                                                BorderRadius.circular(20.h)),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "Others",
+                                              style: GoogleFonts.roboto(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 12.sp,
+                                                  color:
+                                                      const Color(0xFF001AFF)),
+                                            )
+                                          ],
+                                        )),
+                                  )
+                                ]),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                            "*You have selected ${professionalSelected} out of ${_professional.length}",
+                            style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12.sp,
+                                color: const Color(0xFF868686)))
+                      ],
                     ),
                   ),
                 ),
+                SizedBox(height: 50.h,),
+                Container(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Student",
+                          style: GoogleFonts.roboto(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Wrap(
+                            spacing: 6,
+                            runSpacing: 10,
+                            children: _student
+                                    .map((e) => GestureDetector(
+                                          onTap: () => {
+                                            setState(() {
+                                              e.isSelected = !e.isSelected;
+                                            })
+                                          },
+                                          child: Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  5.w, 4.h, 5.w, 4.h),
+                                              decoration: BoxDecoration(
+                                                  color: e.isSelected
+                                                      ? const Color(0xFFEF3737)
+                                                      : const Color(0xFFFFFFFF),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.h)),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  (e.imagePath != "") ? Image.asset(
+                                                    e.imagePath,
+                                                    height: 12.h,
+                                                    width: 12.h,
+                                                  ) : SizedBox(height: 1.h,),
+                                                  SizedBox(
+                                                    width: 4.w,
+                                                  ),
+                                                  Text(
+                                                    e.name,
+                                                    style: GoogleFonts.roboto(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 12.sp,
+                                                        color: e.isSelected
+                                                            ? Colors.white
+                                                            : const Color(
+                                                                0xFF001AFF)),
+                                                  )
+                                                ],
+                                              )),
+                                        ))
+                                    .toList() +
+                                [
+                                  GestureDetector(
+                                    onTap: () => {
+                                      //Add new Interests
+                                      _showAddInterestDialog(_student)
+                                    },
+                                    child: Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            5.w, 4.h, 5.w, 4.h),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFFFFFFFF),
+                                            borderRadius:
+                                                BorderRadius.circular(20.h)),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "Others",
+                                              style: GoogleFonts.roboto(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 12.sp,
+                                                  color:
+                                                      const Color(0xFF001AFF)),
+                                            )
+                                          ],
+                                        )),
+                                  )
+                                ]),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                            "*You have selected ${studentSelected} out of ${_student.length}",
+                            style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12.sp,
+                                color: const Color(0xFF868686)))
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 50.h,),
+                Container(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "General",
+                          style: GoogleFonts.roboto(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Wrap(
+                            spacing: 6,
+                            runSpacing: 10,
+                            children: _general
+                                    .map((e) => GestureDetector(
+                                          onTap: () => {
+                                            setState(() {
+                                              e.isSelected = !e.isSelected;
+                                            })
+                                          },
+                                          child: Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  5.w, 4.h, 5.w, 4.h),
+                                              decoration: BoxDecoration(
+                                                  color: e.isSelected
+                                                      ? const Color(0xFFEF3737)
+                                                      : const Color(0xFFFFFFFF),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.h)),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  (e.imagePath != "") ? Image.asset(
+                                                    e.imagePath,
+                                                    height: 12.h,
+                                                    width: 12.h,
+                                                  ) : SizedBox(height: 1.h,),
+                                                  SizedBox(
+                                                    width: 4.w,
+                                                  ),
+                                                  Text(
+                                                    e.name,
+                                                    style: GoogleFonts.roboto(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontSize: 12.sp,
+                                                        color: e.isSelected
+                                                            ? Colors.white
+                                                            : const Color(
+                                                                0xFF001AFF)),
+                                                  )
+                                                ],
+                                              )),
+                                        ))
+                                    .toList() +
+                                [
+                                  GestureDetector(
+                                    onTap: () => {
+                                      //Add new Interests
+                                      _showAddInterestDialog(_general)
+                                    },
+                                    child: Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            5.w, 4.h, 5.w, 4.h),
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xFFFFFFFF),
+                                            borderRadius:
+                                                BorderRadius.circular(20.h)),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "Others",
+                                              style: GoogleFonts.roboto(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 12.sp,
+                                                  color:
+                                                      const Color(0xFF001AFF)),
+                                            )
+                                          ],
+                                        )),
+                                  )
+                                ]),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                            "*You have selected ${generalSelected} out of ${_general.length}",
+                            style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12.sp,
+                                color: const Color(0xFF868686)))
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 80.h,),
+                Row(
+                
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Color(0xFF1EA7D7)),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)
+                          ))
+                        ),
+                      
+                        child: Text(
+                          "Save",
+                          style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.sp,
+                              color: Colors.white),
+                        ))
+                  ],
+                )
               ],
             ),
           ),
