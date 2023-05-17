@@ -243,7 +243,7 @@ class _HomeState extends State<Home> {
                   child: SizedBox(
                       height: 40.h,
                       child: Icon(Icons.home,
-                          size: 30.h, color: const Color(0xFFCBFB5E))),
+                          size: 30.h, color: const Color(0xFF1EA7D7))),
                   onTap: () {
                     //Navigate to Home
                   },
@@ -255,7 +255,7 @@ class _HomeState extends State<Home> {
                           size: 30.h, color: const Color(0xFFFFFFFF))),
                   onTap: () {
                     //Navigate to Video Call
-                    Navigator.pushNamed(context, "/videocall", arguments: ScreenArguments(isLiked: isLiked));
+                    Navigator.pushNamed(context, "/videoset");
                   },
                 ),
                 GestureDetector(

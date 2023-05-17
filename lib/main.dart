@@ -5,6 +5,7 @@ import 'package:netteam/screens/Home.dart';
 import 'package:netteam/screens/Interests.dart';
 import 'package:netteam/screens/ResetPassword.dart';
 import 'package:netteam/screens/Verify.dart';
+import 'package:netteam/screens/VideoSet.dart';
 import 'package:netteam/screens/login.dart';
 import 'package:netteam/screens/signup.dart';
 import 'package:netteam/screens/splashscreen.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
           ),
-          initialRoute: "/interests",
+          initialRoute: "/",
           routes: {
             "/splash": (context) => const SplashScreen(),
             "/": (context) => const Home(),
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
             "/verify" : (context) => const Verify(),
             "/resetpassword": (context) => const  ResetPassword(),
             "/interests" : (context) => const Interests(),
-            "/videocall" : (context) => const VideoCall()
+            "/videocall" : (context) => const VideoCall(),
+            "/videoset" : (context) => const VideoSet(),
           },
         );
       },
