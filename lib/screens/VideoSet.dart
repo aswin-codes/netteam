@@ -105,102 +105,112 @@ class _VideoSetState extends State<VideoSet> {
                   );
                 }).toList(),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.h),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _interestController,
-                        decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: const Color.fromRGBO(
-                                        139, 139, 139, 0.26))),
-                            labelText: 'Add Interest',
-                            errorText: isError ? errMsg : null,
-                            labelStyle: GoogleFonts.roboto(
-                                fontSize: 13.sp,
-                                color: const Color(0xFF979797),
-                                fontWeight: FontWeight.normal)),
-                        onFieldSubmitted: (value) {
-                          _addInterest(value);
-                        },
+              Column(children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 10.h),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _interestController,
+                          decoration: InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: const Color.fromRGBO(
+                                          139, 139, 139, 0.26))),
+                              labelText: 'Add Interest',
+                              errorText: isError ? errMsg : null,
+                              labelStyle: GoogleFonts.roboto(
+                                  fontSize: 13.sp,
+                                  color: const Color(0xFF979797),
+                                  fontWeight: FontWeight.normal)),
+                          onFieldSubmitted: (value) {
+                            _addInterest(value);
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 8.0),
-                    Text(
-                      "${interests.length}/3",
+                      SizedBox(width: 8.0),
+                      Text(
+                        "${interests.length}/3",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.sp,
+                            color: Colors.white),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                SizedBox(
+                  height: 35.h,
+                  width: 106.w,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Color(0xFF14ADD9))),
+                    child: Text(
+                      "Manual",
                       style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.sp,
-                          color: Colors.white),
-                    )
-                  ],
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          fontSize: 15.sp),
+                    ),
+                    onPressed: () {
+                      if (interests.length > 0) {
+                        Navigator.pushNamed(context, "/videocall");
+                      } else {
+                        setState(() {
+                          errMsg = "Kindly enter interests for manual matching";
+                          isError = true;
+                        });
+                        Timer(const Duration(seconds: 3), () {
+                          setState(() {
+                            isError = false;
+                          });
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ]),
+              SizedBox(
+                height: 20.h,
+              ),
+              Divider(
+                color: Colors.grey,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              SizedBox(
+                height: 35.h,
+                width: 106.w,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xFFE90818))),
+                  child: Text(
+                    "Auto Join",
+                    style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                        fontSize: 15.sp),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/videocall");
+                  },
                 ),
               ),
               SizedBox(
-                height: 60.h,
+                height: 20.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 35.h,
-                    width: 106.w,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Color(0xFFE90818))),
-                      child: Text(
-                        "Auto Join",
-                        style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                            fontSize: 15.sp),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/videocall");
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35.h,
-                    width: 106.w,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Color(0xFF14ADD9))),
-                      child: Text(
-                        "Manual",
-                        style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                            fontSize: 15.sp),
-                      ),
-                      
-                      onPressed: () {
-                        if (interests.length > 0) {
-                          Navigator.pushNamed(context, "/videocall");
-                        } else {
-                          setState(() {
-                            errMsg =
-                                "Kindly enter interests for manual matching";
-                            isError = true;
-                          });
-                          Timer(const Duration(seconds: 3), () {
-                            setState(() {
-                              isError = false;
-                            });
-                          });
-                        }
-                      },
-                    ),
-                  ),
-                ],
+              Divider(
+                color: Colors.grey,
               ),
               SizedBox(
-                height: 50.h,
+                height: 20.h,
               ),
               Container(
                 child: Column(
