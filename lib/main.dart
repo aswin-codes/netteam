@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
           ),
-          initialRoute: "/",
+          initialRoute: "/splash",
           routes: {
             "/splash": (context) => const SplashScreen(),
             "/": (context) => const Home(),

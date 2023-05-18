@@ -143,36 +143,52 @@ class _VideoSetState extends State<VideoSet> {
                 SizedBox(
                   height: 30.h,
                 ),
-                SizedBox(
-                  height: 35.h,
-                  width: 106.w,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Color(0xFF14ADD9))),
-                    child: Text(
-                      "Manual",
-                      style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          fontSize: 15.sp),
+                Row(
+                  children: [
+                    
+                    Expanded(
+                      child: Text(
+                        "Based on 3 interest details that you added above",
+                        style: GoogleFonts.roboto(
+                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ),
-                    onPressed: () {
-                      if (interests.length > 0) {
-                        Navigator.pushNamed(context, "/videocall");
-                      } else {
-                        setState(() {
-                          errMsg = "Kindly enter interests for manual matching";
-                          isError = true;
-                        });
-                        Timer(const Duration(seconds: 3), () {
-                          setState(() {
-                            isError = false;
-                          });
-                        });
-                      }
-                    },
-                  ),
+                    SizedBox(width: 15.w,),
+                    SizedBox(
+                      height: 35.h,
+                      width: 106.w,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xFF14ADD9))),
+                        child: Text(
+                          "Manual",
+                          style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                              fontSize: 15.sp),
+                        ),
+                        onPressed: () {
+                          if (interests.length > 0) {
+                            Navigator.pushNamed(context, "/videocall");
+                          } else {
+                            setState(() {
+                              errMsg =
+                                  "Kindly enter interests for manual matching";
+                              isError = true;
+                            });
+                            Timer(const Duration(seconds: 3), () {
+                              setState(() {
+                                isError = false;
+                              });
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ]),
               SizedBox(
@@ -184,24 +200,39 @@ class _VideoSetState extends State<VideoSet> {
               SizedBox(
                 height: 20.h,
               ),
-              SizedBox(
-                height: 35.h,
-                width: 106.w,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xFFE90818))),
-                  child: Text(
-                    "Auto Join",
-                    style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontSize: 15.sp),
+              Row(
+                children: [
+                  SizedBox(
+                    height: 35.h,
+                    width: 125.w,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xFFE90818))),
+                      child: Text(
+                        "Auto Match",
+                        style: GoogleFonts.roboto(
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            fontSize: 15.sp),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/videocall");
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/videocall");
-                  },
-                ),
+                  
+                    SizedBox(width: 15.w,),
+                   Expanded(
+                      child: Text(
+                        "Based on interest details that you added in your profile",
+                        style: GoogleFonts.roboto(
+                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                ],
               ),
               SizedBox(
                 height: 20.h,
@@ -217,10 +248,10 @@ class _VideoSetState extends State<VideoSet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Note :",
+                      "Warning : ",
                       style: GoogleFonts.roboto(
                           fontSize: 13.sp,
-                          color: Colors.white,
+                          color: Colors.orange,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -237,7 +268,7 @@ class _VideoSetState extends State<VideoSet> {
                               "1.",
                               style: GoogleFonts.roboto(
                                   fontSize: 13.sp,
-                                  color: Colors.white,
+                                  color: Colors.orange,
                                   fontWeight: FontWeight.w500),
                             ),
                             SizedBox(
@@ -245,10 +276,10 @@ class _VideoSetState extends State<VideoSet> {
                             ),
                             Expanded(
                               child: Text(
-                                "Manual Join makes video call with interests  that you have added.",
+                                "Do not use bad language and be professional",
                                 style: GoogleFonts.roboto(
                                     fontSize: 13.sp,
-                                    color: Colors.white,
+                                    color: Colors.orange,
                                     fontWeight: FontWeight.w500),
                               ),
                             ),
@@ -265,7 +296,7 @@ class _VideoSetState extends State<VideoSet> {
                               "2.",
                               style: GoogleFonts.roboto(
                                   fontSize: 13.sp,
-                                  color: Colors.white,
+                                  color: Colors.orange,
                                   fontWeight: FontWeight.w500),
                             ),
                             SizedBox(
@@ -273,10 +304,10 @@ class _VideoSetState extends State<VideoSet> {
                             ),
                             Expanded(
                               child: Text(
-                                "Auto join connects you with same interests that you have added in your profile.",
+                                "Legal actions could be taken if the users are reported",
                                 style: GoogleFonts.roboto(
                                     fontSize: 13.sp,
-                                    color: Colors.white,
+                                    color: Colors.orange,
                                     fontWeight: FontWeight.w500),
                               ),
                             ),
