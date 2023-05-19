@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:netteam/screens/Chat.dart';
 import 'package:netteam/screens/ForgotPassword.dart';
 import 'package:netteam/screens/Home.dart';
 import 'package:netteam/screens/Interests.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
             "/interests" : (context) => const Interests(),
             "/videocall" : (context) => const VideoCall(),
             "/videoset" : (context) => const VideoSet(),
+            "/chat": (context) => const Chat(),
           },
         );
       },
